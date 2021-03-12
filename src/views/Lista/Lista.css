@@ -30,12 +30,6 @@
   padding-top: 8rem;
 }
 
-.Container-card {
-  background-color: rgb(233, 236, 239);
-  width: 20rem !important;
-  height: 60rem !important;
-}
-
 /* Estilos Tabela */
 
 .datatable-templating-demo .table-header {
