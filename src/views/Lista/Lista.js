@@ -101,26 +101,13 @@ const Lista = () => {
    * @returns
    */
   const pokemonImageTemplate = (rowData) => {
-    // Aqui, quando chega no 899º pokemon, o id salta de 898 para 10001,
-    // sendo necessário fazer um ajuste para seguir iterando corretamente sobre o vetor dadosPokemon[]
-    if (rowData.id < 899) {
-      return (
-        <img
-          src={dadosPokemon[rowData.id - 1].sprites.front_default}
-          width="48"
-          className="product-image"
-        />
-      );
-    } else {
-      // 10001 - 9103 = 898 posição no vetor (899º pokemon, já que o vetor começa em 0)
-      return (
-        <img
-          src={dadosPokemon[rowData.id - 9103].sprites.front_default}
-          width="48"
-          className="product-image"
-        />
-      );
-    }
+    return (
+      <img
+        src={rowData.sprites.front_default}
+        width="48"
+        className="product-image"
+      />
+    );
   };
 
   /**
