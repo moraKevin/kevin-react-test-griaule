@@ -1,4 +1,7 @@
+import { Button } from "primereact/button";
 import { useEffect, useState } from "react";
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import "./Lista.css";
 
 const Lista = () => {
@@ -6,7 +9,7 @@ const Lista = () => {
   const [dadosPokemon, setdadosPokemon] = useState("");
   // Variável de estado para definir quando terminou a resposta da API (evita erros de undefined)
   const [carregando, setCarregando] = useState(true);
-  const url = "https://pokeapi.co/api/v2/pokemon/";
+  const url = "https://pokeapi.co/api/v2/pokemon?limit=1118";
 
   /**
    * *useEffect()
@@ -52,7 +55,20 @@ const Lista = () => {
   async function getDadosDetalhados(dados) {
     let arrayPokemon = await Promise.all(
       dados.map(async (pokemon) => {
-        let gravaPokemon = await getPokemonDetalhado(pokemon.url);
+        let gravaPokemon;
+        // Por algum motivo, nos pokemons 160 e 164, o endpoint fornecido retorna 404,
+        // sendo necessário remover o ultimo caracter '/' para pegar os dados destes 2 pokemons
+        if (
+          pokemon.url === "https://pokeapi.co/api/v2/pokemon/160/" ||
+          pokemon.url === "https://pokeapi.co/api/v2/pokemon/164/"
+        ) {
+          gravaPokemon = await getPokemonDetalhado(
+            // remoção do último caracter do endpoint fornecido
+            pokemon.url.replace(/.$/, "")
+          );
+        } else {
+          gravaPokemon = await getPokemonDetalhado(pokemon.url);
+        }
         return gravaPokemon;
       })
     );
@@ -78,16 +94,111 @@ const Lista = () => {
     });
   }
 
+  /**
+   * *pokemonImageTemplate
+   * Constante de tratamento de dados para retornar a imagem correta do pokemon
+   * @param rowData dados da linha da tabela
+   * @returns
+   */
+  const pokemonImageTemplate = (rowData) => {
+    // Aqui, quando chega no 899º pokemon, o id salta de 898 para 10001,
+    // sendo necessário fazer um ajuste para seguir iterando corretamente sobre o vetor dadosPokemon[]
+    if (rowData.id < 899) {
+      return (
+        <img
+          src={dadosPokemon[rowData.id - 1].sprites.front_default}
+          width="48"
+          className="product-image"
+        />
+      );
+    } else {
+      // 10001 - 9103 = 898 posição no vetor (899º pokemon, já que o vetor começa em 0)
+      return (
+        <img
+          src={dadosPokemon[rowData.id - 9103].sprites.front_default}
+          width="48"
+          className="product-image"
+        />
+      );
+    }
+  };
+
+  /**
+   * *pokemonTypeTemplate
+   * Constante de tratamento de dados para retornar a imagem do tipo correta do pokemon
+   * @param rowData dados da linha da tabela
+   * @returns
+   */
+  const pokemonTypeTemplate = (rowData) => {
+    // Caso para quando há só um tipo
+    if (rowData.types.length === 1) {
+      return (
+        <img
+          src={"/assets/typeImages/" + rowData.types[0].type.name + ".png"}
+          width="48"
+          className="product-image"
+          alt={rowData.types[0].type.name}
+        />
+      );
+      // Caso para quando há dois tipos
+    } else if (rowData.types.length === 2) {
+      return (
+        <div className="Container-duoType">
+          <img
+            src={"/assets/typeImages/" + rowData.types[0].type.name + ".png"}
+            width="48"
+            className="product-image"
+            alt={rowData.types[0].type.name}
+          />
+          <img
+            src={"/assets/typeImages/" + rowData.types[1].type.name + ".png"}
+            width="48"
+            className="product-image"
+            alt={rowData.types[0].type.name}
+          />
+        </div>
+      );
+    }
+  };
+
+  const pokemonHeightTemplate = (rowData) => {
+    // Altura é dada em decímetro por algum motivo
+    return (rowData.height * 10).toFixed(1) + " cm";
+  };
+
+  const pokemonWeightTemplate = (rowData) => {
+    // Peso é dado em hectograma por algum motivo
+    return (rowData.weight * 0.1).toFixed(1) + " Kg";
+  };
+
   return (
     <div className="Lista">
       <header className="Lista-header">
-        {carregando ? (
-          <p>Carregando pokemons...</p>
-        ) : (
-          <p>
-            O pokemon {dadosPokemon[16].name} tem id {dadosPokemon[16].id}
-          </p>
-        )}
+        <div className="Container-tela">
+          {carregando ? (
+            <div className="Container-loading">
+              <img src="/assets/loadingGif.gif" width="200"></img>
+              <p>Carregando pokemons...</p>
+            </div>
+          ) : (
+            <div className="Container-tabela">
+              <DataTable
+                value={dadosPokemon}
+                paginator
+                paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Pokemons"
+                rows={20}
+              >
+                <Column field="id" header="Id"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column header="Image" body={pokemonImageTemplate}></Column>
+                <Column header="Height" field={pokemonHeightTemplate}></Column>
+                <Column header="Weight" field={pokemonWeightTemplate}></Column>
+                <Column header="Type" body={pokemonTypeTemplate}></Column>
+              </DataTable>
+            </div>
+          )}
+        </div>
       </header>
     </div>
   );
