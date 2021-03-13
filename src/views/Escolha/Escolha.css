@@ -12,3 +12,101 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.Container-cards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 40rem;
+  width: 80rem;
+  padding: 5rem;
+  background-color: lightgray;
+}
+
+.Card-esquerda,
+.Card-direita {
+  margin: 0rem 1rem;
+  height: 30rem;
+  width: 36rem;
+}
+
+.Card-esquerda {
+  background-color: magenta;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 30rem;
+  width: 36rem;
+}
+
+.Card-inicial-1 {
+  background-color: honeydew;
+  height: 10rem;
+  width: 10rem;
+}
+
+.Cards-iniciais-inferiores {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.Card-inicial-2,
+.Card-inicial-3 {
+  background-color: honeydew;
+  height: 10rem;
+  width: 10rem;
+  margin: 3rem 2rem;
+}
+
+.Card-direita {
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 30rem;
+  width: 36rem;
+}
+
+.Caixa-selecao,
+.Caixa-escolhido {
+  background-color: #ffa500;
+  margin-left: 2rem;
+  height: 26rem;
+  width: 16rem;
+}
+
+.Caixa-escolhido {
+  margin-right: 2rem;
+}
+
+.Caixa-selecao {
+  background-color: blanchedalmond;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-style: dashed;
+  border-color: rgb(158, 157, 157);
+  border-width: 2px;
+}
+
+.Seta-selecao {
+  color: gray;
+  font-size: 2rem;
+}
+
+.Texto-selecao {
+  color: gray;
+  font-family: Garamond;
+  margin: 1rem 0.5rem;
+}
+
+@media screen and (max-width: 1500px) {
+  .Container-cards {
+    height: 30rem;
+    width: 60rem;
+  }
+}
