@@ -12,20 +12,17 @@ const Home = () => {
 
       <p>Kevin's Griaule PokeTest</p>
       <div className="Div-buttons">
-        {/* Botão para navegar para a tela de Lista de Pokemons */}
         <Link to="/Lista" style={{ textDecoration: "none" }}>
-          <Button
-            label="Lista de Pokemons"
-            className="Navigation-buttons p-button-outlined p-button-success"
-          />
+          <div className="Card-lista">
+            <p className="Texto-card">Lista de Pokemons</p>
+            <img src="./pokedex.png" width="300"></img>
+          </div>
         </Link>
-
-        {/* Botão para navegar até a tela de escolha de Pokemon inicial */}
         <Link to="/Escolha" style={{ textDecoration: "none" }}>
-          <Button
-            label="Escolha de Pokemon Inicial"
-            className="Navigation-buttons p-button-outlined p-button-success"
-          />
+          <div className="Card-escolha">
+            <p className="Texto-card">Escolha de Pokemon Inicial</p>
+            <img src="./oakLab.jpg" width="300"></img>
+          </div>
         </Link>
       </div>
     </div>
