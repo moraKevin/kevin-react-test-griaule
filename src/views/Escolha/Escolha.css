@@ -13,7 +13,7 @@
 .Header-escolha {
   height: 6.5rem;
   background-color: rgba(0, 80, 134, 0.9);
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%;
   padding: 0rem 3rem;
@@ -131,5 +131,15 @@
   .Caixa-selecao {
     height: 26rem;
     width: 29rem;
+  }
+
+  .Geracao-escolha {
+    margin-left: 11rem;
+  }
+
+  .Card-esquerda,
+  .Card-direita {
+    height: 29rem;
+    width: 26rem;
   }
 }

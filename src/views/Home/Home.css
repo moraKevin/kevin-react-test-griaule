@@ -1,8 +1,5 @@
-.Home {
+.Container-home {
   text-align: center;
-}
-
-.Home-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -11,6 +8,19 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Header-home {
+  height: 6.5rem;
+  background-color: rgba(0, 80, 134, 0.9);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 0rem 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .Div-buttons {

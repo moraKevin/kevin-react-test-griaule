@@ -56,11 +56,12 @@ const Lista = () => {
     let arrayPokemon = await Promise.all(
       dados.map(async (pokemon) => {
         let gravaPokemon;
-        // Por algum motivo, nos pokemons 160 e 164, o endpoint fornecido retorna 404,
+        // Por algum motivo, nos pokemons 160, 164 e 428 o endpoint fornecido retorna 404,
         // sendo necessário remover o ultimo caracter '/' para pegar os dados destes 2 pokemons
         if (
           pokemon.url === "https://pokeapi.co/api/v2/pokemon/160/" ||
-          pokemon.url === "https://pokeapi.co/api/v2/pokemon/164/"
+          pokemon.url === "https://pokeapi.co/api/v2/pokemon/164/" ||
+          pokemon.url === "https://pokeapi.co/api/v2/pokemon/428/"
         ) {
           gravaPokemon = await getPokemonDetalhado(
             // remoção do último caracter do endpoint fornecido
@@ -159,34 +160,37 @@ const Lista = () => {
   };
 
   return (
-    <div className="Lista">
-      <header className="Lista-header">
-        <div className="Container-tela">
-          {carregando ? (
-            <div className="Container-loading">
-              <img src="/assets/loadingGif.gif" width="200"></img>
-              <p>Carregando pokemons...</p>
-            </div>
-          ) : (
-            <div className="Container-tabela">
-              <DataTable
-                value={dadosPokemon}
-                paginator
-                paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Pokemons"
-                rows={20}
-              >
-                <Column field="id" header="Id"></Column>
-                <Column field="name" header="Name"></Column>
-                <Column header="Image" body={pokemonImageTemplate}></Column>
-                <Column header="Height" field={pokemonHeightTemplate}></Column>
-                <Column header="Weight" field={pokemonWeightTemplate}></Column>
-                <Column header="Type" body={pokemonTypeTemplate}></Column>
-              </DataTable>
-            </div>
-          )}
-        </div>
+    <div className="Container-lista">
+      <header className="Header-lista">
+        <img src="./logo_griaule_small_inv.png" width="170"></img>
+        <img src="./Pokemon-Logo.png" width="170"></img>
       </header>
+      <p className="Titulo">Pokedéx Griaule</p>
+      <div className="Container-tela">
+        {carregando ? (
+          <div className="Container-loading">
+            <img src="/assets/loadingGif.gif" width="200"></img>
+            <p>Carregando pokemons...</p>
+          </div>
+        ) : (
+          <div className="Container-tabela">
+            <DataTable
+              value={dadosPokemon}
+              paginator
+              paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Pokemons"
+              rows={20}
+            >
+              <Column field="id" header="Id"></Column>
+              <Column field="name" header="Name"></Column>
+              <Column header="Image" body={pokemonImageTemplate}></Column>
+              <Column header="Height" field={pokemonHeightTemplate}></Column>
+              <Column header="Weight" field={pokemonWeightTemplate}></Column>
+              <Column header="Type" body={pokemonTypeTemplate}></Column>
+            </DataTable>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
