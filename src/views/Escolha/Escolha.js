@@ -123,7 +123,7 @@ const Escolha = () => {
           <img src="./logo_griaule_small_inv.png" width="170"></img>
           <img src="./Pokemon-Logo.png" width="170"></img>
         </header>
-        <h4 className="Titulo">Escolha seu Inicial!</h4>
+        <p className="Titulo">Escolha seu Inicial!</p>
         <div className="Geracao-escolha">
           <p className="Geracao-texto">Geração: </p>
           {geracoes.map(montaGeracao)}

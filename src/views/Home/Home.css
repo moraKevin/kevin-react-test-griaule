@@ -1,8 +1,5 @@
-.Home {
+.Container-home {
   text-align: center;
-}
-
-.Home-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -13,7 +10,49 @@
   color: white;
 }
 
+.Header-home {
+  height: 6.5rem;
+  background-color: rgba(0, 80, 134, 0.9);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 0rem 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .Div-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Card-lista,
+.Card-escolha {
+  height: 24rem;
+  width: 30rem;
+  margin: 0rem 5rem;
+  border: solid;
+  border-radius: 1rem;
+  border-color: #689f38;
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Card-lista:hover,
+.Card-escolha:hover {
+  border-width: 3px;
+}
+
+.Texto-card {
+  font-family: Garamond;
+  color: rgb(236, 227, 227);
+  margin-bottom: 3rem;
 }
 
 .Navigation-buttons {
