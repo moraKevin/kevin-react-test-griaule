@@ -1,30 +1,31 @@
-import "./Escolha.css";
-import "./Dropbox/Dropbox";
-import "./Inicial/Inicial";
-import { PrimeIcons } from "primereact/api";
-import { DndProvider, useDrag } from "react-dnd";
 import React, { useEffect, useState } from "react";
-import Inicial from "./Inicial/Inicial";
-import Dropbox from "./Dropbox/Dropbox";
+import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import "./Dropbox/Dropbox";
+import Dropbox from "./Dropbox/Dropbox";
+import "./Escolha.css";
+import "./Inicial/Inicial";
+import Inicial from "./Inicial/Inicial";
 
 const Escolha = () => {
   // Variável de estado dos dados detalhados dos pokemons
   const [dadosPokemon, setdadosPokemon] = useState("");
   // Variável de estado para definir quando terminou a resposta da API (evita erros de undefined)
   const [carregando, setCarregando] = useState(true);
-  const [reset, setReset] = useState([false, false, false]);
-  const urls = [
-    "https://pokeapi.co/api/v2/pokemon/1",
-    "https://pokeapi.co/api/v2/pokemon/4",
-    "https://pokeapi.co/api/v2/pokemon/7",
+  const [reset, setReset] = useState([false, false, false, false]);
+  const geracoes = [1, 2, 3, 4, 5, 6, 7, 8];
+  const url = "https://pokeapi.co/api/v2/pokemon/";
+  var urls = [
+    "https://pokeapi.co/api/v2/pokemon/",
+    "https://pokeapi.co/api/v2/pokemon/",
+    "https://pokeapi.co/api/v2/pokemon/",
   ];
-
   /**
    * *useEffect()
    * Função de ciclo de vida que roda somente uma vez, após o carregamento da tela
    */
   useEffect(() => {
+    urls = [url + 1, url + 4, url + 7];
     fetchDadosIniciais();
   }, []);
 
@@ -33,6 +34,7 @@ const Escolha = () => {
    * Função responsável por iniciar os GETs dos dados dos pokemons iniciais
    */
   async function fetchDadosIniciais() {
+    setCarregando(true);
     let arrayPokemon = await Promise.all(
       urls.map(async (url) => {
         let gravaPokemon = await getPokemonDetalhado(url);
@@ -62,56 +64,109 @@ const Escolha = () => {
     });
   }
 
+  function atualizaUrl(geracao) {
+    var id;
+    switch (geracao) {
+      case 1:
+        id = 1;
+        break;
+      case 2:
+        id = 152;
+        break;
+      case 3:
+        id = 252;
+        break;
+      case 4:
+        id = 387;
+        break;
+      case 5:
+        id = 495;
+        break;
+      case 6:
+        id = 650;
+        break;
+      case 7:
+        id = 722;
+        break;
+      case 8:
+        id = 810;
+        break;
+    }
+
+    urls = [url + id, url + (id + 3), url + (id + 6)];
+    setReset([false, false, false, true]);
+    setReset([false, false, false, false]);
+    fetchDadosIniciais();
+  }
+
+  function montaGeracao(geracao) {
+    return (
+      <div
+        key={geracao}
+        onClick={() => atualizaUrl(geracao)}
+        className="Geracao-card"
+      >
+        {geracao}
+      </div>
+    );
+  }
+
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="Escolha">
-        <header className="Escolha-header">
-          <div className="Container-cards">
-            <div className="Card-esquerda">
-              <div className="Card-inicial-1">
-                {carregando ? (
-                  <p style={{ color: "black" }}>Carregando Pokemons</p>
-                ) : (
-                  <Inicial
-                    dadoPokemon={dadosPokemon[0]}
-                    setReset={setReset}
-                    apaga={reset[0]}
-                    card={1}
-                  />
-                )}
-              </div>
-              <div className="Card-inicial-2">
-                {carregando ? (
-                  <p>Carregando Pokemons</p>
-                ) : (
-                  <Inicial
-                    dadoPokemon={dadosPokemon[1]}
-                    setReset={setReset}
-                    apaga={reset[1]}
-                    card={2}
-                  />
-                )}
-              </div>
-              <div className="Card-inicial-3">
-                {carregando ? (
-                  <p>Carregando Pokemons</p>
-                ) : (
-                  <Inicial
-                    dadoPokemon={dadosPokemon[2]}
-                    setReset={setReset}
-                    apaga={reset[2]}
-                    card={3}
-                  />
-                )}
-              </div>
+      <div className="Container-escolha">
+        <header className="Header-escolha">
+          <img src="./logo_griaule_small_inv.png" width="170"></img>
+          <img src="./Pokemon-Logo.png" width="170"></img>
+        </header>
+        <div className="Geracao-escolha">
+          <p className="Geracao-texto">Geração: </p>
+          {geracoes.map(montaGeracao)}
+        </div>
+        <div className="Container-cards">
+          <div className="Card-esquerda">
+            <div className="Card-inicial-1">
+              {carregando ? (
+                <p style={{ color: "black" }}>Carregando Pokemons</p>
+              ) : (
+                <Inicial
+                  dadoPokemon={dadosPokemon[0]}
+                  setReset={setReset}
+                  apaga={reset[0]}
+                  card={1}
+                />
+              )}
             </div>
-            <div className="Card-direita">
-              <div className="Caixa-selecao">
-                <Dropbox />
-              </div>
+            <div className="Card-inicial-2">
+              {carregando ? (
+                <p>Carregando Pokemons</p>
+              ) : (
+                <Inicial
+                  dadoPokemon={dadosPokemon[1]}
+                  setReset={setReset}
+                  apaga={reset[1]}
+                  card={2}
+                />
+              )}
+            </div>
+            <div className="Card-inicial-3">
+              {carregando ? (
+                <p>Carregando Pokemons</p>
+              ) : (
+                <Inicial
+                  dadoPokemon={dadosPokemon[2]}
+                  setReset={setReset}
+                  apaga={reset[2]}
+                  card={3}
+                />
+              )}
             </div>
           </div>
-        </header>
+          <div className="Card-direita">
+            <div className="Caixa-selecao">
+              <Dropbox vazio={reset} />
+            </div>
+          </div>
+        </div>
       </div>
     </DndProvider>
   );

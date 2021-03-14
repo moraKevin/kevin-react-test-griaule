@@ -1,10 +1,9 @@
-import { useDrag, useDrop } from "react-dnd";
 import React, { useState } from "react";
+import { useDrop } from "react-dnd";
 import { ItemTypes } from "../ItemTypes";
 import "./Dropbox.css";
-import { PrimeIcons } from "primereact/api";
 
-const Dropbox = () => {
+const Dropbox = ({ vazio }) => {
   // Estado contendo os dados do Pokemon escolhido
   const [dadoPokemon, setdadoPokemon] = useState();
 
@@ -12,7 +11,6 @@ const Dropbox = () => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.BOX,
     drop: (item, monitor) => {
-      console.log(item);
       setdadoPokemon(item.dadoPokemon);
     },
     collect: (monitor) => ({

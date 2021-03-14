@@ -1,8 +1,5 @@
-.Escolha {
+.Container-escolha {
   text-align: center;
-}
-
-.Escolha-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -13,6 +10,48 @@
   color: white;
 }
 
+.Header-escolha {
+  height: 6.5rem;
+  background-color: rgba(0, 80, 134, 0.9);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0rem 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Geracao-escolha {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  width: 40rem;
+  height: 3rem;
+  align-self: end;
+  align-items: center;
+  margin-left: 20rem;
+}
+
+.Geracao-texto {
+  color: rgb(245, 245, 245);
+  font-size: 1.5rem;
+}
+
+.Geracao-card {
+  color: black;
+  border: solid;
+  border-color: black;
+  border-radius: 0.2rem;
+  border-width: 1px;
+  font-size: 1.5rem;
+  height: 2rem;
+  width: 2rem;
+  margin: 0rem 0.5rem;
+  background-color: rgb(245, 245, 245);
+}
+
 .Container-cards {
   display: flex;
   flex-direction: row;
@@ -21,12 +60,12 @@
   height: 40rem;
   width: 80rem;
   padding: 5rem;
-  background-color: lightgray;
+  background-image: url("../../assets/oakLab.jpg");
 }
 
 .Card-esquerda,
 .Card-direita {
-  background-color: whitesmoke;
+  background-color: rgba(245, 245, 245, 1);
   display: flex;
   align-items: center;
   margin: 0rem 1rem;
