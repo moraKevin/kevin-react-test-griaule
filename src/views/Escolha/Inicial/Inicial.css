@@ -1,0 +1,25 @@
+.Container {
+  border: solid;
+  border-color: black;
+  border-radius: 2rem;
+  border-width: 1px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  border-radius: 2rem;
+}
+
+.Container-dragging {
+  border: 2px dashed rgba(0, 0, 0, 0.2);
+  border-radius: 2rem;
+  padding-top: 1rem;
+  display: flex;
+  box-shadow: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: grabbing;
+}

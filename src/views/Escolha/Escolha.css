@@ -1,8 +1,5 @@
-.Escolha {
+.Container-escolha {
   text-align: center;
-}
-
-.Escolha-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -11,4 +8,128 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Header-escolha {
+  height: 6.5rem;
+  background-color: rgba(0, 80, 134, 0.9);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0rem 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Titulo {
+  color: rgb(245, 245, 245);
+  font-size: 3rem;
+  font-family: Garamond;
+  margin: 1rem;
+}
+
+.Geracao-escolha {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  width: 40rem;
+  height: 3rem;
+  align-self: end;
+  align-items: center;
+  margin-left: 20rem;
+}
+
+.Geracao-texto {
+  color: rgb(245, 245, 245);
+  font-size: 1.5rem;
+}
+
+.Geracao-card {
+  color: black;
+  border: solid;
+  border-color: black;
+  border-radius: 0.2rem;
+  border-width: 1px;
+  font-size: 1.5rem;
+  height: 2rem;
+  width: 2rem;
+  margin: 0rem 0.5rem;
+  background-color: rgb(245, 245, 245);
+  cursor: pointer;
+}
+
+.Container-cards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 40rem;
+  width: 80rem;
+  padding: 5rem;
+  background-image: url("../../assets/oakLab.jpg");
+}
+
+.Card-esquerda,
+.Card-direita {
+  background-color: rgba(245, 245, 245, 1);
+  display: flex;
+  align-items: center;
+  margin: 0rem 1rem;
+  height: 30rem;
+  width: 36rem;
+}
+
+.Card-esquerda {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Card-direita {
+  flex-direction: row;
+}
+
+.Card-inicial-1 {
+  height: 7rem;
+  width: 23rem;
+  margin: 2rem 2rem 0rem 2rem;
+}
+
+.Card-inicial-2 {
+  height: 7rem;
+  width: 23rem;
+  margin: 3rem 2rem;
+}
+
+.Card-inicial-3 {
+  height: 7rem;
+  width: 23rem;
+  margin: 0rem 2rem 2rem 2rem;
+}
+
+.Caixa-selecao {
+  background-color: whitesmoke;
+  display: flex;
+  margin: 2rem;
+  height: 26rem;
+  width: 29rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-style: dashed;
+  border-color: rgb(158, 157, 157);
+  border-width: 2px;
+}
+
+@media screen and (max-width: 1500px) {
+  .Container-cards {
+    height: 30rem;
+    width: 60rem;
+  }
+
+  .Caixa-selecao {
+    height: 26rem;
+    width: 29rem;
+  }
 }

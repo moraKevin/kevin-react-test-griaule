@@ -1,0 +1,34 @@
+.Dropbox-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.Escolhido-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Text-after {
+  color: black;
+  font-family: Garamond;
+  margin: 0rem;
+}
+
+.Text-before {
+  color: gray;
+  font-family: Garamond;
+  margin: 1rem 0.5rem;
+}
+
+.Seta-selecao {
+  color: gray;
+}
+
+@media screen and (max-width: 1500px) {
+}
