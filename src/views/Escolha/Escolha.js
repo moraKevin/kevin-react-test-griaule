@@ -10,8 +10,12 @@ import Inicial from "./Inicial/Inicial";
 const Escolha = () => {
   // Variável de estado dos dados detalhados dos pokemons
   const [dadosPokemon, setdadosPokemon] = useState("");
+
   // Variável de estado para definir quando terminou a resposta da API (evita erros de undefined)
   const [carregando, setCarregando] = useState(true);
+
+  // Variável de estado responsável por indicar qual card deve ficar vazio (pokemon escolhido)
+  // Caso haja troca de geração, reset[3] é utilizado para resetar o pokemon em display
   const [reset, setReset] = useState([false, false, false, false]);
   const geracoes = [1, 2, 3, 4, 5, 6, 7, 8];
   const url = "https://pokeapi.co/api/v2/pokemon/";
@@ -64,7 +68,7 @@ const Escolha = () => {
     });
   }
 
-  function atualizaUrl(geracao) {
+  function mudaGeracao(geracao) {
     var id;
     switch (geracao) {
       case 1:
@@ -94,8 +98,9 @@ const Escolha = () => {
     }
 
     urls = [url + id, url + (id + 3), url + (id + 6)];
+    // Envia uma flag true em reset[3] para que o componente Dropbox possa resetar o
+    // Pokemon em display
     setReset([false, false, false, true]);
-    setReset([false, false, false, false]);
     fetchDadosIniciais();
   }
 
@@ -103,7 +108,7 @@ const Escolha = () => {
     return (
       <div
         key={geracao}
-        onClick={() => atualizaUrl(geracao)}
+        onClick={() => mudaGeracao(geracao)}
         className="Geracao-card"
       >
         {geracao}
@@ -118,6 +123,7 @@ const Escolha = () => {
           <img src="./logo_griaule_small_inv.png" width="170"></img>
           <img src="./Pokemon-Logo.png" width="170"></img>
         </header>
+        <h4 className="Titulo">Escolha seu Inicial!</h4>
         <div className="Geracao-escolha">
           <p className="Geracao-texto">Geração: </p>
           {geracoes.map(montaGeracao)}
@@ -163,7 +169,7 @@ const Escolha = () => {
           </div>
           <div className="Card-direita">
             <div className="Caixa-selecao">
-              <Dropbox vazio={reset} />
+              <Dropbox vazio={reset[3]} />
             </div>
           </div>
         </div>

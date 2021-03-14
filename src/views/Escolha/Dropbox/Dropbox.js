@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "../ItemTypes";
 import "./Dropbox.css";
@@ -18,6 +18,15 @@ const Dropbox = ({ vazio }) => {
       canDrop: monitor.canDrop(),
     }),
   }));
+
+  // useEffect para detectar mudanças em vazio
+  // quando vazio for true, significa que houve mudança de geração,
+  // e então os dados do Pokemon escolhido são resetados
+  useEffect(() => {
+    if (vazio) {
+      setdadoPokemon(null);
+    }
+  }, [vazio]);
 
   return (
     <div ref={drop} role={"Dropbox"} className="Dropbox-container">

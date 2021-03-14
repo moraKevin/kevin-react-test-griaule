@@ -23,6 +23,13 @@
   justify-content: space-between;
 }
 
+.Titulo {
+  color: rgb(245, 245, 245);
+  font-size: 3rem;
+  font-family: Garamond;
+  margin: 1rem;
+}
+
 .Geracao-escolha {
   display: flex;
   flex-direction: row;
@@ -50,6 +57,7 @@
   width: 2rem;
   margin: 0rem 0.5rem;
   background-color: rgb(245, 245, 245);
+  cursor: pointer;
 }
 
 .Container-cards {
