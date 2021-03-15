@@ -9,7 +9,7 @@ const Lista = () => {
   const [dadosPokemon, setdadosPokemon] = useState("");
   // Variável de estado para definir quando terminou a resposta da API (evita erros de undefined)
   const [carregando, setCarregando] = useState(true);
-  const url = "https://pokeapi.co/api/v2/pokemon?limit=500";
+  const url = "https://pokeapi.co/api/v2/pokemon?limit=1118";
 
   /**
    * *useEffect()
@@ -56,20 +56,7 @@ const Lista = () => {
     let arrayPokemon = await Promise.all(
       dados.map(async (pokemon) => {
         let gravaPokemon;
-        // Por algum motivo, nos pokemons 160, 164 e 428 o endpoint fornecido retorna 404,
-        // sendo necessário remover o ultimo caracter '/' para pegar os dados destes 3 pokemons
-        if (
-          pokemon.url === "https://pokeapi.co/api/v2/pokemon/160/" ||
-          pokemon.url === "https://pokeapi.co/api/v2/pokemon/164/" ||
-          pokemon.url === "https://pokeapi.co/api/v2/pokemon/428/"
-        ) {
-          gravaPokemon = await getPokemonDetalhado(
-            // remoção do último caracter do endpoint fornecido
-            pokemon.url.replace(/.$/, "")
-          );
-        } else {
-          gravaPokemon = await getPokemonDetalhado(pokemon.url);
-        }
+        gravaPokemon = await getPokemonDetalhado(pokemon.url);
         return gravaPokemon;
       })
     );
@@ -93,7 +80,13 @@ const Lista = () => {
           sucesso(data);
         })
         .catch((err) => {
-          console.log(err);
+          // Alguns pokemons retornam 404 caso a ultima barra esteja no endpoint dele
+          // Essa resolução trata este problema
+          fetch(url.replace(/.$/, ""))
+            .then((res) => res.json())
+            .then((data) => {
+              sucesso(data);
+            });
         });
     });
   }
