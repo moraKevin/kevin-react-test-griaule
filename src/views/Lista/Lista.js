@@ -91,6 +91,9 @@ const Lista = () => {
         .then((res) => res.json())
         .then((data) => {
           sucesso(data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     });
   }
