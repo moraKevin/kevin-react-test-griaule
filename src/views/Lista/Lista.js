@@ -9,7 +9,7 @@ const Lista = () => {
   const [dadosPokemon, setdadosPokemon] = useState("");
   // Variável de estado para definir quando terminou a resposta da API (evita erros de undefined)
   const [carregando, setCarregando] = useState(true);
-  const url = "https://pokeapi.co/api/v2/pokemon?limit=1118";
+  const url = "https://pokeapi.co/api/v2/pokemon?limit=500";
 
   /**
    * *useEffect()
@@ -57,7 +57,7 @@ const Lista = () => {
       dados.map(async (pokemon) => {
         let gravaPokemon;
         // Por algum motivo, nos pokemons 160, 164 e 428 o endpoint fornecido retorna 404,
-        // sendo necessário remover o ultimo caracter '/' para pegar os dados destes 2 pokemons
+        // sendo necessário remover o ultimo caracter '/' para pegar os dados destes 3 pokemons
         if (
           pokemon.url === "https://pokeapi.co/api/v2/pokemon/160/" ||
           pokemon.url === "https://pokeapi.co/api/v2/pokemon/164/" ||
